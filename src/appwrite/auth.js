@@ -9,7 +9,7 @@ export class AuthService {
   constructor() {
     this.client
       .setEndpoint(confige.appwriteUrl)
-      .setProject(confige.appwriteProjectID);
+      .setProject(confige.appwriteProjectId);
     this.account = new Account(this.client);
   }
 
@@ -24,40 +24,39 @@ export class AuthService {
       if (userAccount) {
         // call another method
         // return userAccount;
-        return this.login({email , password})
+        return this.login({ email, password });
       } else {
         return userAccount;
       }
     } catch (error) {
-        console.log("Appwrite service :: createAcount :: error", error);
-        //   throw error;
+      console.log("Appwrite service :: createAcount :: error", error);
+      //   throw error;
     }
   }
 
-  async login ({email , password}) {
+  async login({ email, password }) {
     try {
-       return await this.account.createEmailSession(email,password)
+      return await this.account.createEmailSession(email, password);
     } catch (error) {
-        // throw error;
-        console.log("Appwrite service :: login :: error  ", error);
+      // throw error;
+      console.log("Appwrite service :: login :: error  ", error);
     }
   }
 
   async getCurrentUser() {
     try {
-       return await this.account.get();
+      return await this.account.get();
     } catch (error) {
-        console.log("Appwrite service :: getCurrentUser :: error", error);
+      console.log("Appwrite service :: getCurrentUser :: error", error);
     }
     return null;
   }
 
   async logout() {
     try {
-        return await  this.account.deleteSessions()
+      return await this.account.deleteSessions();
     } catch (error) {
-        console.log("Appwrite service :: logout :: error", error);
-        
+      console.log("Appwrite service :: logout :: error", error);
     }
   }
 }
